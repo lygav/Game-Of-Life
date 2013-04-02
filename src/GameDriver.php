@@ -1,0 +1,61 @@
+<?php
+/**
+ * Author: Vlad Lyga
+ *
+ */
+
+include '../autoloader.php';
+
+class GameDriver {
+
+    private $width  = 0;
+    private $height = 0;
+
+    function __construct($game, $width, $height)
+    {
+        $this->game = $game;
+
+        $this->width  = $width;
+        $this->height = $height;
+    }
+
+    function run($iterations)
+    {
+        $this->render($this->game->live_cells);
+        while ($iterations) {
+            $this->render($this->game->evolve());
+            $iterations -= 1;
+        }
+    }
+
+    private function render($coordinates)
+    {
+        for ($w = $this->width; $w >= 0; $w --) {
+            $tokens = '';
+            for ($h = $this->height; $h >= 0 ; $h --) {
+                if (false !== array_search(($h.','.$w), $coordinates))
+                    $tokens .= '#';
+                else
+                    $tokens .= '-';
+            }
+            echo $tokens.PHP_EOL;
+        }
+        echo PHP_EOL;
+    }
+}
+
+$game = new GameDriver(
+    new Gof(
+        array(
+            '0,0',
+            '0,1',
+            '1,0',
+            '9,9',
+            '10,9',
+            '11,9',
+            '11,10',
+            '10,11',
+        )
+    ),
+    15, 20);
+$game->run(30);
