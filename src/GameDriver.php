@@ -11,6 +11,11 @@ class GameDriver {
     private $width  = 0;
     private $height = 0;
 
+    /**
+     * @param object $game the gof object
+     * @param int $width of the visible world
+     * @param int $height of the visible world
+     */
     function __construct($game, $width, $height)
     {
         $this->game = $game;
@@ -43,19 +48,3 @@ class GameDriver {
         echo PHP_EOL;
     }
 }
-
-$game = new GameDriver(
-    new Gof(
-        array(
-            '0,0',
-            '0,1',
-            '1,0',
-            '9,9',
-            '10,9',
-            '11,9',
-            '11,10',
-            '10,11',
-        )
-    ),
-    15, 20);
-$game->run(30);
