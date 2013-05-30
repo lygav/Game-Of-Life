@@ -1,8 +1,4 @@
 <?php
-/**
- * Author: Vlad Lyga
- *
- */
 
 class Gof {
 
@@ -25,18 +21,20 @@ class Gof {
         $next_gen = array();
         $cell_reference_frequencies = $this->calculate_neigbours_frequencies();
         foreach ($cell_reference_frequencies as $cell => $frequency) {
-            if ($this->should_cell_live($cell, $frequency)) $next_gen[] = $cell;
+            if ($this->should_cell_live($cell, $frequency)) {
+	            $next_gen[] = $cell;
+            }
         }
-
         return $this->live_cells = $next_gen;
     }
 
     private function should_cell_live($cell, $frequency)
     {
-        if (false !== array_search($cell, $this->live_cells))
-            return $this->should_live_cell_live($frequency);
-        else
-            return $this->should_dead_cell_live($frequency);
+        if (false !== array_search($cell, $this->live_cells)) {
+	        return $this->should_live_cell_live($frequency);
+        } else {
+	        return $this->should_dead_cell_live($frequency);
+        }
     }
 
     private function should_live_cell_live($frequency)
@@ -49,7 +47,6 @@ class Gof {
         return $frequency == 3;
     }
 
-
     private function calculate_neigbours_frequencies()
     {
         $total_frequencies = array();
@@ -57,7 +54,6 @@ class Gof {
             list($x, $y) = explode(',', $cell);
             $total_frequencies = array_merge($total_frequencies, $this->get_neighbours(array('x' => $x, 'y' => $y)));
         }
-
         return array_count_values($total_frequencies);
     }
 
@@ -67,11 +63,11 @@ class Gof {
         $frequencies = array();
         foreach ($neighbours_coordinates_range as $x) {
             foreach ($neighbours_coordinates_range as $y) {
-                if (($x.','.$y) !== '0,0')
-                    $frequencies[] = ($cell['x'] + $x).','.($cell['y'] + $y);
+                if (($x.','.$y) !== '0,0') {
+	                $frequencies[] = ($cell['x'] + $x) . ',' . ($cell['y'] + $y);
+                }
             }
         }
-
         return $frequencies;
     }
 }

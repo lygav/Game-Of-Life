@@ -1,9 +1,4 @@
 <?php
-/**
- * Author: Vlad Lyga
- *
- * This is a sample usage of a how to run a game
- */
 
 include 'GameDriver.php';
 

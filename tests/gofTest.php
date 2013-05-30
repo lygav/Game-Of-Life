@@ -1,8 +1,4 @@
 <?php
-/**
- * Author: Vlad Lyga
- *
- */
 
 include '../autoloader.php';
 
