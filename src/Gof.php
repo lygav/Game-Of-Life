@@ -22,14 +22,14 @@ class Gof
 		$next_gen = array();
 		$cell_ref_frequencies = $this->calcualte_cell_ref_frequencies();
 		foreach ($cell_ref_frequencies as $cell => $frequency) {
-			if ($this->should_cell_live($cell, $frequency)) {
-				$next_gen[] = $cell;
+			if ($this->should_live($cell, $frequency)) {
+				array_push($next_gen, $cell);
 			}
 		}
 		return $this->live_cells = $next_gen;
 	}
 
-	private function should_cell_live ($cell, $frequency)
+	private function should_live ($cell, $frequency)
 	{
 		if (FALSE !== array_search($cell, $this->live_cells)) {
 			return $this->should_stay_alive($frequency);
