@@ -17,9 +17,21 @@ class GofTest extends PHPUnit_Framework_TestCase
 		$this->assertEmpty($game->evolve());
 	}
 
-	public function testLiveCellWithTwoLiveNeigboursLives ()
+	public function liveCellsWithTwoLiveNeighboursFixture ()
 	{
-		$game     = new Gof(array('10,10', '11,11', '9,9'));
+		return array(
+			array(array('10,10', '10,9', '11,9')),
+			array(array('10,10', '9,10', '11,10')),
+			array(array('10,10', '9,11', '11,11')),
+		);
+	}
+
+	/**
+	 * @dataProvider liveCellsWithTwoLiveNeighboursFixture
+	 */
+	public function testLiveCellWithTwoLiveNeigboursLives (array $fixture)
+	{
+		$game     = new Gof($fixture);
 		$next_gen = $game->evolve();
 		$this->assertContains('10,10', $next_gen);
 	}
